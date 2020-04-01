@@ -1,12 +1,11 @@
 import 'package:dart_week_api/dart_week_api.dart';
 
-class LoginRequest extends Serializable{
-
+class CadastrarUsuarioRequest extends Serializable {
   String login;
   String senha;
 
   @override
-  Map<String, dynamic> asMap() {
+  Map<String, dynamic > asMap() {
     return {
       'login': login,
       'senha': senha
@@ -19,18 +18,16 @@ class LoginRequest extends Serializable{
     senha = object['senha'] as String;
   }
 
-
   Map<String, String> validate() {
-    final Map<String, String> validateResult = {};
+    final Map<String,String> mapValidate = {};
     if (login == null || login.isEmpty) {
-      validateResult['login'] = 'Login Obrigatório';
-    } 
+      mapValidate['login'] = 'Login Obrigatório';
+    }
 
     if (senha == null || senha.isEmpty) {
-      validateResult['login'] = 'Login Obrigatório';
-    } 
+      mapValidate['senha'] = 'Senha Obrigatório';
+    }
 
-    return validateResult;
+    return mapValidate;
   }
-
 }

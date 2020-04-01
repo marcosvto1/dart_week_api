@@ -1,10 +1,13 @@
 import 'dart:convert';
 
 import 'package:dart_week_api/controllers/login/dto/login_request.dart';
+import 'package:dart_week_api/controllers/usuario/dto/cadastrar_usuario_request.dart';
 import 'package:dart_week_api/dart_week_api.dart';
 import 'package:dart_week_api/repository/usuario_repository.dart';
 
 import 'package:crypto/crypto.dart';
+import 'package:dart_week_api/utils/criptografia_util.dart';
+import 'package:dart_week_api/utils/jwt_utils.dart';
 
 class UsuarioService {
   UsuarioService(this.context): usuarioRepository = UsuarioRepository(context);
@@ -15,11 +18,17 @@ class UsuarioService {
     final String login = request.login;
     final String senha = request.senha;
 
-    final senhaBytes = utf8.encode(senha);
-    final String senhaCriptografada = sha256.convert(senhaBytes).toString();
-    print(senhaCriptografada);
+    final String senhaCriptografada = CriptografiaUtils.criptografarSenha(senha);
+
     final usuario = await usuarioRepository.recuperarUsuarioPorLoginESenha(login, senhaCriptografada);
-    
+    if (usuario != null) {
+      return JwtUtils.gerarTokenJWT(usuario);
+    }
+
     return usuario?.login;
+  }
+
+  Future<void> salvarUsuario(CadastrarUsuarioRequest request) async{
+    await usuarioRepository.salvarUsuario(request);
   }
 }
