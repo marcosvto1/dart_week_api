@@ -21,4 +21,11 @@ class UsuarioRepository {
     usuarioSave.senha = CriptografiaUtils.criptografarSenha(request.senha);
     await context.insertObject(usuarioSave);
   }
+
+  Future<UsuarioModel> buscarPorId(int id) async{
+    final query = Query<UsuarioModel>(context)
+      ..where((usuario) => usuario.id).equalTo(id);
+
+      return await query.fetchOne();
+  }
 }

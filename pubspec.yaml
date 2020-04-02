@@ -8,7 +8,8 @@ environment:
 
 dependencies:
   aqueduct: ^3.0.0
-  jaguar_jwt: ^2.1,5
+  jaguar_jwt: ^2.1.5
+  intl: ^0.16.1
   
 dev_dependencies:
   test: ^1.0.0

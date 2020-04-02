@@ -1,3 +1,5 @@
+import 'package:dart_week_api/routers/categoria_router.dart';
+import 'package:dart_week_api/routers/movimentacoes_router.dart';
 import 'package:dart_week_api/routers/usuarios_router.dart';
 
 import 'dart_week_api.dart';
@@ -35,6 +37,8 @@ class DartWeekApiChannel extends ApplicationChannel {
   Controller get entryPoint {
     final router = Router();
     UsuariosRouter.configurar(router, context);
+    CategoriaRouter.configurar(router, context);
+    MovimentacoesRouter.configurar(router, context);
     //router.route("/model/[:id]").link(() => ManagedObjectController<Model>(context));
  
     return router;

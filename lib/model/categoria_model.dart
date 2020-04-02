@@ -5,7 +5,7 @@ import '../dart_week_api.dart';
 class CategoriaModel extends ManagedObject<_CategoriaModel> implements _CategoriaModel {}
 
 enum TipoCategoria {
-  receite, despesa
+  receita, despesa
 }
 
 @Table(name: 'categoria')
